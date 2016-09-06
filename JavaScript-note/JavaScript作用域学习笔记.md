@@ -1,0 +1,2 @@
+# JavaScript作用域学习笔记 
+
