@@ -30,6 +30,10 @@ js常说一切都是对象，不过也不是所有的都是对象，值类型不
 
 如上图，SuperType是是一个函数，右侧的方框就是它的原型。
 
+原型既然作为对象，属性的集合，不可能就只弄个constructor来玩玩，肯定可以自定义的增加许多属性。例如Object，人家的prototype里面，就有好几个其他属性。
+
+![prototype property](images/prototype2.png)
+
 可以在自己自定义的方法的prototype中新增自己的属性
 
         function Fn() { }
@@ -41,5 +45,62 @@ js常说一切都是对象，不过也不是所有的都是对象，值类型不
 
 ![prototype3](images/prototype3.png)
 
+再来写code，进一步理解原型干嘛用
+
+        function Fn() { }
+        Fn.prototype.name = 'Ryan';
+        Fn.prototype.getYear = function () {
+            return ‘80后’;
+        };
+
+        var fn = new Fn();
+        console.log(fn.name);
+        console.log(fn.getYear());
+
+即，Fn是一个函数，fn对象是从Fn函数new出来的，这样***fn对象就可以调用Fn.prototype中的属性***。
+
+
+
+因为每个对象都有一个隐藏的属性——“__proto__”，这个属性引用了创建这个对象的函数的prototype。即：fn.__proto__ === Fn.prototype
+
+这里的"__proto__"成为“隐式原型”.每个对象都有一个__proto__属性，指向创建该对象的函数的prototype。
+
+下面很好理解
+
+        var foo = {
+        x: 10,
+        y: 20
+        }; 
+
+![_proto_](images/_proto_1.png)
+
+当我不指定__proto__的时候，foo也会预留一个这样的属性，
+
+如果有明确的指向，那么这个链表就链起来啦。
+
+很明显，下图中b和c共享a的属性和方法，同时又有自己的私有属性。
+
+__proto__默认的也有指向。它指向的是最高级的object.prototype，而object.prototype的__proto__为空。 
+
+        var a = {
+        x: 10,
+        calculate: function (z) {
+        return this.x + this.y + z
+        }
+        };
+        var b = {
+        y: 20,
+        __proto__: a
+        };
+
+        var c = {
+        y: 30,
+        __proto__: a
+        };
+
+        // call the inherited method
+        b.calculate(30); // 60 
+
+![__proto__这个属性链接指针的本质](images/_proto_2.png)
 
 
