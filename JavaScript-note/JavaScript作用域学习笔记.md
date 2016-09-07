@@ -45,6 +45,7 @@
 上面讲解有点难懂，下面给出了摘自[梦想天空博客-理解 JavaScript 作用域和作用域链](http://www.cnblogs.com/lhb25/archive/2011/09/06/javascript-scope-chain.html)
 
 在JavaScript中，函数也是对象，实际上，JavaScript里一切都是对象。函数对象和其它对象一样，拥有可以通过代码访问的属性和一系列仅供JavaScript引擎访问的内部属性。其中一个内部属性是[[Scope]]，由ECMA-262标准第三版定义，该内部属性包含了函数被创建的作用域中对象的集合，这个集合被称为函数的作用域链，它决定了哪些数据能被函数访问。
-下面[作用域链](Images/Scope Chain.jpg)
+[作用域链](images/Scope Chain.jpg)如下图所示
 
-![作用域链](Images/Scope Chain.jpg)
+![作用域链](images/Scope Chain.jpg)
+
