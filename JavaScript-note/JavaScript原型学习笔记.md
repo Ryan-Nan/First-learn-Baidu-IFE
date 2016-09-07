@@ -26,3 +26,20 @@ js常说一切都是对象，不过也不是所有的都是对象，值类型不
 
 话说回来，原型干嘛用？原型是函数的一个属性，JavaScript默认的给每个函数一个属性——prototype（原型）。每个函数都有这样的属性，它叫prototype。这个prototype的属性值是一个对象（属性的集合，再次强调！），默认的只有一个叫做constructor的属性，指向这个函数本身。
 
+![prototype](images/prototype1.png)
+
+如上图，SuperType是是一个函数，右侧的方框就是它的原型。
+
+可以在自己自定义的方法的prototype中新增自己的属性
+
+        function Fn() { }
+        Fn.prototype.name = '王福朋';
+        Fn.prototype.getYear = function () {
+            return 1988;
+        };
+看到没有，这样就变成了下面
+
+![prototype3](images/prototype3.png)
+
+
+
