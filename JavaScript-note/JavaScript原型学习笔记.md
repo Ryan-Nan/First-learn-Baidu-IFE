@@ -117,7 +117,7 @@ Instanceof判断规则如下图所示：
 ##原型链
 什么叫原型链？看下面代码和图便知
 
-！[prototypeChain](images/prototype chain1.png)
+![prototypeChain](images/prototype chain1.png)
 
 以上代码中，f1是Foo函数new出来的对象，f1.a是f1对象的基本属性，f1.b是怎么来的呢？——从Foo.prototype得来，因为f1.`__proto__`指向的是Foo.prototype
 
@@ -125,6 +125,6 @@ Instanceof判断规则如下图所示：
 
 看图便知
 
-！[prototypeChain](images/prototype chain2.png)
+![prototypeChain](images/prototype chain2.png)
 
 上图中，访问f1.b时，f1的基本属性中没有b，于是沿着`__proto__`找到了Foo.prototype.b。
