@@ -103,4 +103,10 @@ js常说一切都是对象，不过也不是所有的都是对象，值类型不
 
 ![__proto__这个属性链接指针的本质](images/_proto_2.png)
 
+###判断神器
+* 判断值类型还有Object/Function用`typeof`判断；
+* 判断对象的实例用`instanceof`来判断。
 
+![instanceof](images/instanceof.png)
+
+Instanceof的判断队则是：沿着A（对象）的__proto__这条线来找，同时沿着B（函数）的prototype这条线来找，如果两条线能找到同一个引用，即同一个对象，那么就返回true。如果找到终点还未重合，则返回false。
