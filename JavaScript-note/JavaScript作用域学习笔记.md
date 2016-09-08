@@ -73,6 +73,6 @@
 第二种方法是闭包。这种方法很常用很常见的。闭包啥玩意儿，可以做什么，什么用法等等。目前我正处于学习阶段。完了后会做做笔记。
 
 ##补充：
-找到了非常棒的博客，截图下来
+找到了非常棒的博客，讲的非常棒，截图下来
 
-![explaingood](images/googsayscope.png)
+![explaingood](images/explaingood.png)
