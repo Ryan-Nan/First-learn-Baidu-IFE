@@ -109,4 +109,8 @@ js常说一切都是对象，不过也不是所有的都是对象，值类型不
 
 ![instanceof](images/instanceof.png)
 
-Instanceof的判断队则是：沿着A（对象）的__proto__这条线来找，同时沿着B（函数）的prototype这条线来找，如果两条线能找到同一个引用，即同一个对象，那么就返回true。如果找到终点还未重合，则返回false。
+Instanceof的判断规则是：沿着A（第一个变量是对象暂称A）的`__proto__`这条线来找，同时沿着B（第二个变量一般是函数）的prototype这条线来找，如果两条线能找到同一个引用，即同一个对象，那么就返回true。如果找到终点还未重合，则返回false。
+
+Instanceof判断规则如下图所示：
+
+![instanceof](images/instanceof2.png)
