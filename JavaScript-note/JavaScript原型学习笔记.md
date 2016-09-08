@@ -61,9 +61,9 @@ js常说一切都是对象，不过也不是所有的都是对象，值类型不
 
 
 
-因为每个对象都有一个隐藏的属性——“__proto__”，这个属性引用了创建这个对象的函数的prototype。即：fn.__proto__ === Fn.prototype
+因为每个对象都有一个隐藏的属性——“`__proto__`”，这个属性引用了创建这个对象的函数的prototype。即：fn.`__proto__` === Fn.prototype
 
-这里的"__proto__"成为“隐式原型”.每个对象都有一个__proto__属性，指向创建该对象的函数的prototype。
+这里的"`__proto__`"成为“隐式原型”.每个对象都有一个`__proto__`属性，指向创建该对象的函数的prototype。
 
 下面很好理解
 
@@ -74,13 +74,13 @@ js常说一切都是对象，不过也不是所有的都是对象，值类型不
 
 ![_proto_](images/_proto_1.png)
 
-当我不指定__proto__的时候，foo也会预留一个这样的属性，
+当我不指定`__proto__`的时候，foo也会预留一个这样的属性，
 
 如果有明确的指向，那么这个链表就链起来啦。
 
 很明显，下图中b和c共享a的属性和方法，同时又有自己的私有属性。
 
-__proto__默认的也有指向。它指向的是最高级的object.prototype，而object.prototype的__proto__为空。 
+`__proto__`默认的也有指向。它指向的是最高级的object.prototype，而object.prototype的`__proto__`为空。 
 
         var a = {
         x: 10,
