@@ -114,3 +114,17 @@ Instanceof的判断规则是：沿着A（第一个变量是对象暂称A）的`_
 Instanceof判断规则如下图所示：
 
 ![instanceof](images/instanceof2.png)
+##原型链
+什么叫原型链？看下面代码和图便知
+
+！[prototypeChain](images/prototype chain1.png)
+
+以上代码中，f1是Foo函数new出来的对象，f1.a是f1对象的基本属性，f1.b是怎么来的呢？——从Foo.prototype得来，因为f1.`__proto__`指向的是Foo.prototype
+
+**访问一个对象的属性时，先在基本属性中查找，如果没有，再沿着__proto__这条链向上找，这就是原型链。**
+
+看图便知
+
+！[prototypeChain](images/prototype chain2.png)
+
+上图中，访问f1.b时，f1的基本属性中没有b，于是沿着`__proto__`找到了Foo.prototype.b。
