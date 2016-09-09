@@ -3,7 +3,7 @@
 ###什么是构造函数？
 构造函数 ，是一种特殊的方法。主要用来在创建对象时初始化对象， 即为对象成员变量赋初始值，总与new运算符一起使用在创建对象的语句中。
 
-看下面一段代码和图便清楚
+仔细看下面一段代码和图便清楚
 
     // 构造函数
     function Foo(y) {
@@ -47,6 +47,8 @@
  
     );
 
-上述代码可表示为如下的关系：
+上述代码可表示为如下的构造函数和对象关系：
+
 ![constructor](images/constructor.png)
 
+上述图示可以看出，每一个object都有一个prototype. 构造函数Foo也拥有自己的`__proto__`, 也就是Function.prototype, 而Function.prototype的`__proto__`指向了Object.prototype. 重申一遍，Foo.prototype只是一个显式的属性，也就是b和c的`__proto__`属性。
