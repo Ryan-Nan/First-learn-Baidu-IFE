@@ -124,7 +124,7 @@ Javascript规定，每一个构造函数都有一个prototype属性，指向另�
 
     　　alert(Cat.prototype.isPrototypeOf(cat1)); //true
     　　
-####hasOwnproperty()
+####hasOwnProperty()
 每个实例对象都有一个hasOwnProperty()方法，用来判断某一个属性到底是本地属性，还是继承自prototype对象的属性。
 
     　　alert(cat1.hasOwnProperty("name")); // true
@@ -132,9 +132,11 @@ Javascript规定，每一个构造函数都有一个prototype属性，指向另�
 
 ####in运算符
 in运算符可以用来判断，某个实例是否含有某个属性，不管是不是本地属性。
+
         alert("name" in cat1); // true
         alert("type" in cat1); // true
         
 in运算符还可以用来遍历某个对象的所有属性。
 
     　　for(var prop in cat1) { alert("cat1["+prop+"]="+cat1[prop]); }
+##继承
