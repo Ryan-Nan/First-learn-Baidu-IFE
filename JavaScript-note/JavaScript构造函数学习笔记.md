@@ -14,9 +14,8 @@
     // "Foo.prototype"存放了新建对象的原型引用
     // 所以我们可以将之用于定义继承和共享属性或方法
     // 所以，和上例一样，我们有了如下代码：
-    // 继承属性"x"
     
-    Foo.prototype.x = 10;
+    Foo.prototype.x = 10;  // 继承属性"x"
  
     // 继承方法"calculate"
     Foo.prototype.calculate = function (z) {
@@ -34,8 +33,9 @@
     console.log(
         b.__proto__ === Foo.prototype, // true
         c.__proto__ === Foo.prototype, // true
+        
       // "Foo.prototype"自动创建了一个特殊的属性"constructor"
-      // 指向a的构造函数本身
+      // 指向Foo的构造函数本身
       // 实例"b"和"c"可以通过授权找到它并用以检测自己的构造函数
  
         b.constructor === Foo, // true
@@ -47,5 +47,6 @@
  
     );
 
-
+上述代码可表示为如下的关系：
+![constructor](images/constructor.png)
 
