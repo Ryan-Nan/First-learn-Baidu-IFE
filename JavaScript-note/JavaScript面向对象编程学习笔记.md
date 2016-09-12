@@ -203,7 +203,7 @@ in运算符还可以用来遍历某个对象的所有属性。
 
     　　Cat.prototype.constructor = Cat;
 
-    　　var cat1 = new Cat("大毛","黄色");
+    　　var cat1 = new Cat("桐桐","黄色");
 
     　　alert(cat1.species); // 动物
 
@@ -224,3 +224,73 @@ in运算符还可以用来遍历某个对象的所有属性。
         
 F是空对象，所以几乎不占内存。这时，修改Cat的prototype对象，就不会影响到Animal的prototype对象。
 
+        alert(Animal.prototype.constructor); // Animal
+        
+我们将上面的方法，封装成一个函数，便于使用。
+
+    　　function extend(Child, Parent) {
+
+    　　　　var F = function(){};
+
+    　　　　F.prototype = Parent.prototype;
+
+    　　　　Child.prototype = new F();
+
+    　　　　Child.prototype.constructor = Child;
+
+    　　　　Child.uber = Parent.prototype;
+
+    　　}
+
+使用的时候，方法如下
+
+    　　extend(Cat,Animal);
+
+    　　var cat1 = new Cat("大毛","黄色");
+
+    　　alert(cat1.species); // 动物
+
+
+另外，说明一点，函数体最后一行
+
+    　　Child.uber = Parent.prototype;
+
+意思是为子对象设一个uber属性，这个属性直接指向父对象的prototype属性。（uber是一个德语词，意思是"向上"、"上一层"。）这等于在子对象上打开一条通道，可以直接调用父对象的方法。这一行放在这里，只是为了实现继承的完备性，纯属备用性质。
+
+####五、 拷贝继承
+
+上面是采用prototype对象，实现继承。我们也可以换一种思路，纯粹采用"拷贝"方法实现继承。简单说，如果把父对象的所有属性和方法，拷贝进子对象，不也能够实现继承吗？这样我们就有了第五种方法。
+
+首先，还是把Animal的所有不变属性，都放到它的prototype对象上。
+
+    　　function Animal(){}
+
+    　　Animal.prototype.species = "动物";
+
+然后，再写一个函数，实现属性拷贝的目的。
+
+    　　function extend2(Child, Parent) {
+
+    　　　　var p = Parent.prototype;
+
+    　　　　var c = Child.prototype;
+
+    　　　　for (var i in p) {
+
+    　　　　　　c[i] = p[i];
+
+    　　　　　　}
+
+    　　　　c.uber = p;
+
+    　　}
+
+这个函数的作用，就是将父对象的prototype对象中的属性，一一拷贝给Child对象的prototype对象。
+
+使用的时候，这样写：
+
+    　　extend2(Cat, Animal);
+
+    　　var cat1 = new Cat("大毛","黄色");
+
+    　　alert(cat1.species); // 动物
