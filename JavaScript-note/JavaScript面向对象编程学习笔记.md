@@ -139,4 +139,88 @@ in运算符可以用来判断，某个实例是否含有某个属性，不管是
 in运算符还可以用来遍历某个对象的所有属性。
 
     　　for(var prop in cat1) { alert("cat1["+prop+"]="+cat1[prop]); }
+    　　
+
 ##继承
+###构造函数的继承
+对象之间的"继承"有五种方法。
+
+比如，现在有一个"动物"对象的构造函数。
+
+
+    　　function Animal(){
+
+    　　　　this.species = "动物";
+
+    　　}
+
+还有一个"猫"对象的构造函数。
+
+
+    　　function Cat(name,color){
+
+    　　　　this.name = name;
+
+    　　　　this.color = color;
+
+    　　}
+
+怎样才能使"猫"继承"动物"呢？
+####一、构造函数绑定
+第一种方法也是最简单的方法，使用***call或apply方法***，将父对象的构造函数绑定在子对象上，即在子对象构造函数中加一行：
+
+    　　function Cat(name,color){
+
+    　　　　Animal.apply(this, arguments);
+
+    　　　　this.name = name;
+
+    　　　　this.color = color;
+
+    　　}
+
+    　　var cat1 = new Cat("桐桐","黄色");
+
+    　　alert(cat1.species); // 动物
+
+####二、prototype模式
+如果"猫"的prototype对象，指向一个Animal的实例，那么所有"猫"的实例，就能继承Animal了。
+
+    　　Cat.prototype = new Animal();
+
+    　　Cat.prototype.constructor = Cat;//这对象constructor默认指向Animal，所以手动纠正这对象constructor值为Cat。
+
+    　　var cat1 = new Cat("桐桐","黄色");
+
+    　　alert(cat1.species); // 动物
+
+这显然会导致继承链的紊乱（cat1明明是用构造函数Cat生成的），因此我们必须手动纠正，将Cat.prototype对象的constructor值改为Cat。这就是第二行的意思。
+
+####三、 直接继承prototype
+将Cat的prototype对象，然后指向Animal的prototype对象，这样就完成了继承。
+
+    　　Cat.prototype = Animal.prototype;
+
+    　　Cat.prototype.constructor = Cat;
+
+    　　var cat1 = new Cat("大毛","黄色");
+
+    　　alert(cat1.species); // 动物
+
+与前一种方法相比，这样做的优点是效率比较高（不用执行和建立Animal的实例了），比较省内存。缺点是 Cat.prototype和Animal.prototype现在指向了同一个对象，那么任何对Cat.prototype的修改，都会反映到Animal.prototype。
+
+        Cat.prototype.constructor = Cat;
+        
+这样做的优点是效率比较高（不用执行和建立Animal的实例了），比较省内存。缺点是 Cat.prototype和Animal.prototype现在指向了同一个对象，那么任何对Cat.prototype的修改，都会影响到Animal.prototype。
+
+####四、利用空对象作为中介
+
+        var F = function(){}; //空对象
+
+        F.prototype = Animal.prototype;
+
+        Cat.prototype = new F();
+        Cat.prototype.constructor = Cat;
+        
+F是空对象，所以几乎不占内存。这时，修改Cat的prototype对象，就不会影响到Animal的prototype对象。
+
