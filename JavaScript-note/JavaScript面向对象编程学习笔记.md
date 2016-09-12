@@ -142,7 +142,7 @@ in运算符还可以用来遍历某个对象的所有属性。
     　　
 
 ##继承
-###构造函数的继承
+###构造函数间的继承（类式继承）
 对象之间的"继承"有五种方法。
 
 比如，现在有一个"动物"对象的构造函数。
@@ -294,3 +294,46 @@ F是空对象，所以几乎不占内存。这时，修改Cat的prototype对象�
     　　var cat1 = new Cat("大毛","黄色");
 
     　　alert(cat1.species); // 动物
+
+###原型链继承（对象间的继承）
+比如，现在有一个对象，叫做"中国人"。
+
+    　　var Chinese = {
+    　　　　nation:'中国'
+    　　};
+
+还有一个对象，叫做"医生"。
+
+    　　var Doctor ={
+    　　　　career:'医生'
+    　　}
+
+请问怎样才能让"医生"去继承"中国人"，也就是说，我怎样才能生成一个"中国医生"的对象？
+
+####一、object()方法
+json格式的发明人Douglas Crockford，提出了一个object()函数，可以做到这一点。
+
+    　　function object(o) {
+
+    　　　　function F() {}
+
+    　　　　F.prototype = o;
+
+    　　　　return new F();
+
+    　　}
+
+这个object()函数，其实只做一件事，就是把子对象的prototype属性，指向父对象，从而使得子对象与父对象连在一起。
+
+使用的时候，第一步先在父对象的基础上，生成子对象：
+
+    　　var Doctor = object(Chinese);
+
+然后，再加上子对象本身的属性：
+
+    　　Doctor.career = '医生';
+
+这时，子对象已经继承了父对象的属性了。
+
+    　　alert(Doctor.nation); //中国
+
