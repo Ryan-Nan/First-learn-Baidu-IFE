@@ -36,6 +36,30 @@
      ...  
      } 
 
+
+    //单体模式
+    var circle = (function(){
+    //pravite member!
+        var r = 5;
+        var pi = 3.1416;//后面用分号
+        return{//public member
+            getArea:function(){
+                return r*r*pi;//访问私有成员不要加this
+            },//后面用逗号
+            //如果想改变r和pi的值，只能通过设置一个公有的函数来实现
+            init:function(setR){
+                r = setR;
+            }
+        }
+    })()
+    window.onload = function(){
+        circle.r = 0;//无法访问私有成员,相当于又为circle创建了一个共有成员r
+        alert(circle.getArea());
+        circle.init(0);//通过公有的工具函数便可以访问了。
+        alert(circle.getArea());
+    };
+
+    
 ###工厂(factory)模式
 工厂(Factory)模式：是由一个方法来决定到底要创建哪个类的实例, 而这些实例经常都拥有相同的接口. 这种模式主要用在所实例化的类型在编译期并不能确定， 而是在执行期决定的情况。 说的通俗点，就像公司茶水间的饮料机，要咖啡还是牛奶取决于你按哪个按钮。
 
