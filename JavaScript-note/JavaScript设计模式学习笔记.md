@@ -36,6 +36,7 @@
      ...  
      } 
 
+还有下面例子
 
     //单体模式
     var circle = (function(){
